@@ -16,6 +16,11 @@ android {
         targetCompatibility JavaVersion.VERSION_11
     }
 
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+        }
+    }
 
 //    kotlinOptions {
 //        jvmTarget = '11'
@@ -26,17 +31,19 @@ android {
 }
 
 dependencies {
-    implementation("com.github.akramraza2:Pdfium16KB:1.0.0")
+    implementation("com.github.akramraza2:Pdfium16KB:1.0.1")
 }
 
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-//                groupId = 'com.github.akramraza2'
-//                artifactId = 'pdfium-android'
-//                version = '1.0.0'
-                from components.findByName("release")
+
+publishing {
+    publications {
+        release(MavenPublication) {
+            groupId = 'com.github.akramraza2'
+            artifactId = 'AndroidPdfViewer16KB'
+            version = '1.0.2'
+
+            afterEvaluate {
+                from components.release
             }
         }
     }
