@@ -1,0 +1,43 @@
+apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
+
+android {
+    compileSdkVersion 35
+
+    namespace "com.github.barteksc.pdfviewer"
+
+    defaultConfig {
+        minSdkVersion 26
+        targetSdkVersion 35
+
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+
+//    kotlinOptions {
+//        jvmTarget = '11'
+//    }
+
+    ndkVersion "28.0.12433566"
+
+}
+
+dependencies {
+    implementation("com.github.akramraza2:Pdfium16KB:1.0.0")
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+//                groupId = 'com.github.akramraza2'
+//                artifactId = 'pdfium-android'
+//                version = '1.0.0'
+                from components.findByName("release")
+            }
+        }
+    }
+}
